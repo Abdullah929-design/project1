@@ -13,6 +13,7 @@ console.log('FRONTEND_URL being used:', FRONTEND_URL);
 
 // Signup
 router.post('/signup', async (req, res) => {
+  console.log('FRONTEND_URL being used (signup):', FRONTEND_URL);
   const { email, password, role } = req.body;
   try {
     let user = await User.findOne({ email });
