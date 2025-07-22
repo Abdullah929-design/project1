@@ -7,6 +7,7 @@ const { generateToken, verifyToken } = require('../middleware/jwtUtils');
 
 const router = express.Router();
 
+// Use the deployed frontend URL for email links. Set FRONTEND_URL in Render environment variables.
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 // Signup
@@ -25,6 +26,7 @@ router.post('/signup', async (req, res) => {
     await user.save();
     // Generate verification token
     const token = generateToken({ userId: user._id }, '1h');
+    // Email confirmation link uses the deployed frontend URL
     const verifyLink = `${FRONTEND_URL}/verify-email?token=${token}`;
     await sendEmail(
       email,
@@ -97,6 +99,7 @@ router.post('/forgot-password', async (req, res) => {
     user.resetToken = resetToken;
     user.resetTokenExpiry = Date.now() + 60 * 60 * 1000; // 1 hour
     await user.save();
+    // Password reset link uses the deployed frontend URL
     const resetLink = `${FRONTEND_URL}/reset-password?token=${resetToken}`;
     await sendEmail(
       email,
