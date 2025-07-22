@@ -9,6 +9,7 @@ const router = express.Router();
 
 // Use the deployed frontend URL for email links. Set FRONTEND_URL in Render environment variables.
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+console.log('FRONTEND_URL being used:', FRONTEND_URL);
 
 // Signup
 router.post('/signup', async (req, res) => {
