@@ -13,7 +13,14 @@ cloudinary.config({
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://aspiring-veterinarians.onrender.com', // backend itself (optional)
+    'https://your-frontend.vercel.app' // replace with your actual Vercel frontend URL after deployment
+  ],
+  credentials: true
+}));
 
 // Serve static files from uploads directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
