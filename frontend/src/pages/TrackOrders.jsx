@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './TrackOrders.css';
@@ -10,15 +10,7 @@ const TrackOrders = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/login');
-      return;
-    }
-    fetchOrders();
-  }, [token, navigate, fetchOrders]);
-
-  const fetchOrders = async () => {
+  const fetchOrders = useCallback(async () => {
     try {
       const url = `${process.env.REACT_APP_API_BASE_URL}/api/orders/user-orders`;
       console.log('Fetching orders with token:', token);
@@ -49,7 +41,15 @@ const TrackOrders = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token, navigate]);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    fetchOrders();
+  }, [fetchOrders]);
 
   const getStatusColor = (status) => {
     switch (status) {

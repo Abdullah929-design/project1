@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import './AdminPaymentMethods.css';
 
@@ -17,11 +17,7 @@ const AdminPaymentMethods = () => {
   });
   const [qrCodeFile, setQrCodeFile] = useState(null);
 
-  useEffect(() => {
-    fetchPaymentMethods();
-  }, [fetchPaymentMethods]);
-
-  const fetchPaymentMethods = async () => {
+  const fetchPaymentMethods = useCallback(async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/payment-methods`, {
         headers: {
@@ -40,7 +36,11 @@ const AdminPaymentMethods = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    fetchPaymentMethods();
+  }, [fetchPaymentMethods]);
 
   const handleInputChange = (e) => {
     setFormData({

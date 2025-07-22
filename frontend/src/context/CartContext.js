@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import { useAuth } from './AuthContext';
 
 const CartContext = createContext();
@@ -44,7 +44,7 @@ export const CartProvider = ({ children }) => {
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
   // Fetch cart from backend when user is authenticated
-  const fetchCart = async () => {
+  const fetchCart = useCallback(async () => {
     if (!isAuthenticated()) {
       dispatch({ type: 'CLEAR_CART' });
       return;
@@ -70,7 +70,7 @@ export const CartProvider = ({ children }) => {
       console.error('Error fetching cart:', error);
       dispatch({ type: 'SET_ERROR', payload: error.message });
     }
-  };
+  }, []);
 
   // Add item to cart
   const addToCart = async (productId, quantity = 1) => {
