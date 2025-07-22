@@ -20,7 +20,7 @@ const TrackOrders = () => {
 
   const fetchOrders = async () => {
     try {
-      const url = 'http://localhost:5000/api/orders/user-orders';
+      const url = `${process.env.REACT_APP_API_BASE_URL}/api/orders/user-orders`;
       console.log('Fetching orders with token:', token);
       console.log('User role:', role);
       console.log('Calling URL:', url);

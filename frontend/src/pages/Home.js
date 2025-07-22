@@ -17,8 +17,8 @@ function Home() {
       try {
         setLoading(true);
         const [categoriesRes, productsRes] = await Promise.all([
-          fetch('http://localhost:5000/api/category'),
-          fetch('http://localhost:5000/api/products')
+          fetch(`${process.env.REACT_APP_API_BASE_URL}/api/category`),
+          fetch(`${process.env.REACT_APP_API_BASE_URL}/api/products`)
         ]);
 
         const categoriesData = await categoriesRes.json();

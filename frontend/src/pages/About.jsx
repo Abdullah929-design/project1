@@ -4,7 +4,7 @@ import './About.css';
 const About = () => {
   const [content, setContent] = useState('');
   useEffect(() => {
-    fetch('http://localhost:5000/api/about')
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/about`)
       .then(res => res.json())
       .then(data => setContent(data.content || ''));
   }, []);

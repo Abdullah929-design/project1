@@ -33,14 +33,16 @@ function Admin() {
 
   // Fetch Categories
   const fetchCategories = useCallback(async () => {
-    const res = await fetch('http://localhost:5000/api/category');
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const res = await fetch(`${API_BASE_URL}/api/category`);
     const data = await res.json();
     setCategories(Array.isArray(data) ? data : []);
   }, []);
 
   // Fetch Products
   const fetchProducts = useCallback(async () => {
-    const res = await fetch('http://localhost:5000/api/products');
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    const res = await fetch(`${API_BASE_URL}/api/products`);
     const data = await res.json();
     setProducts(Array.isArray(data) ? data : []);
   }, []);
@@ -53,9 +55,10 @@ function Admin() {
   // Category Handlers
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const url = editId
-      ? `http://localhost:5000/api/category/${editId}`
-      : 'http://localhost:5000/api/category';
+      ? `${API_BASE_URL}/api/category/${editId}`
+      : `${API_BASE_URL}/api/category`;
     const method = editId ? 'PUT' : 'POST';
 
     await fetch(url, {
@@ -73,7 +76,8 @@ function Admin() {
   };
 
   const handleCategoryDelete = async (id) => {
-    await fetch(`http://localhost:5000/api/category/${id}`, {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    await fetch(`${API_BASE_URL}/api/category/${id}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` }
     });
@@ -92,9 +96,10 @@ function Admin() {
 
   const handleProductSubmit = async (e) => {
     e.preventDefault();
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     const url = editProductId
-      ? `http://localhost:5000/api/products/${editProductId}`
-      : 'http://localhost:5000/api/products';
+      ? `${API_BASE_URL}/api/products/${editProductId}`
+      : `${API_BASE_URL}/api/products`;
     const method = editProductId ? 'PUT' : 'POST';
 
     await fetch(url, {
@@ -112,7 +117,8 @@ function Admin() {
   };
 
   const handleProductDelete = async (id) => {
-    await fetch(`http://localhost:5000/api/products/${id}`, {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    await fetch(`${API_BASE_URL}/api/products/${id}`, {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${token}` }
     });

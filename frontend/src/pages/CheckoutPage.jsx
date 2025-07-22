@@ -46,7 +46,7 @@ const CheckoutPage = () => {
 
   const fetchPaymentMethodDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/payment-methods/${paymentMethod}`);
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/payment-methods/${paymentMethod}`);
       if (response.ok) {
         const data = await response.json();
         setPaymentDetails(data);
@@ -135,7 +135,7 @@ const CheckoutPage = () => {
         transactionId: transactionId
       });
 
-      const response = await fetch('http://localhost:5000/api/orders', {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/orders`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

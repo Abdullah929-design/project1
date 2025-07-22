@@ -5,7 +5,7 @@ const AdminAboutSection = ({ token }) => {
   const [input, setInput] = useState('');
   const [msg, setMsg] = useState('');
   useEffect(() => {
-    fetch('http://localhost:5000/api/about')
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/about`)
       .then(res => res.json())
       .then(data => {
         setContent(data.content || '');
@@ -15,7 +15,7 @@ const AdminAboutSection = ({ token }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMsg('');
-    const res = await fetch('http://localhost:5000/api/about', {
+    const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/about`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
