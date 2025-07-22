@@ -17,7 +17,7 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'https://aspiring-veterinarians.onrender.com', // backend itself (optional)
-    'https://magnificent-rabanadas-087581.netlify.app/' // replace with your actual Vercel frontend URL after deployment
+    'https://magnificent-rabanadas-087581.netlify.app' // replace with your actual Vercel frontend URL after deployment
   ],
   credentials: true
 }));
