@@ -19,7 +19,7 @@ const AdminPaymentMethods = () => {
 
   useEffect(() => {
     fetchPaymentMethods();
-  }, []);
+  }, [fetchPaymentMethods]);
 
   const fetchPaymentMethods = async () => {
     try {

@@ -12,7 +12,7 @@ const AdminOrders = () => {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [fetchOrders]);
 
   const fetchOrders = async () => {
     try {

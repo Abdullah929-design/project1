@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 const AdminAboutSection = ({ token }) => {
-  const [content, setContent] = useState('');
   const [input, setInput] = useState('');
   const [msg, setMsg] = useState('');
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_BASE_URL}/api/about`)
       .then(res => res.json())
       .then(data => {
-        setContent(data.content || '');
         setInput(data.content || '');
       });
   }, []);
@@ -25,7 +23,7 @@ const AdminAboutSection = ({ token }) => {
     });
     const data = await res.json();
     if (res.ok) {
-      setContent(input);
+      setInput(input);
       setMsg('About content updated!');
     } else {
       setMsg(data.message || 'Error updating content');

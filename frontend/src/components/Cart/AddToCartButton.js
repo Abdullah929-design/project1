@@ -5,7 +5,7 @@ import './AddToCartButton.css';
 
 const AddToCartButton = ({ product, className = '' }) => {
   const { addToCart, loading, error, items } = useCart();
-  const { token, isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [quantity, setQuantity] = useState(1);
   const [showQuantity, setShowQuantity] = useState(false);
   const [localLoading, setLocalLoading] = useState(false);

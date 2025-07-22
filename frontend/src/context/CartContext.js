@@ -201,7 +201,7 @@ export const CartProvider = ({ children }) => {
   // Fetch cart when token changes (login/logout)
   useEffect(() => {
     fetchCart();
-  }, [token]);
+  }, [fetchCart]);
 
   const value = {
     ...state,

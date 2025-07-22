@@ -16,7 +16,7 @@ const TrackOrders = () => {
       return;
     }
     fetchOrders();
-  }, [token, navigate]);
+  }, [token, navigate, fetchOrders]);
 
   const fetchOrders = async () => {
     try {

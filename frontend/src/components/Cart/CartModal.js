@@ -16,17 +16,11 @@ const CartModal = ({ isOpen, onClose }) => {
   } = useCart();
 
   const navigate = useNavigate();
-  const [quantityInputs, setQuantityInputs] = useState({});
 
   if (!isOpen) return null;
 
   const handleQuantityChange = (productId, newQuantity) => {
     if (newQuantity < 1) return;
-    
-    setQuantityInputs(prev => ({
-      ...prev,
-      [productId]: newQuantity
-    }));
     
     updateQuantity(productId, newQuantity);
   };
